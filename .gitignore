@@ -1,38 +1,48 @@
 ```
-# Laravel-specific ignores
-vendor/
-composer.lock
+# Dependency directories
+/vendor/
+/node_modules/
+
+# Laravel specific
+/bootstrap/cache/
+/storage/framework/cache/data/
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/views/
+/storage/framework/
+/storage/logs/
+/storage/app/public/
+/storage/app/private/
+/storage/app/
+
+# Environment files
 .env
 .env.local
 .env.*
-!env.example
 
-# Cache and logs
-bootstrap/cache/*
-storage/logs/*
-storage/framework/cache/*
-storage/framework/sessions/*
-storage/framework/views/*
+# Compiled files
+*.php~
+*.blade.php~
 
-# Build and distribution
-public/build/
-public/mix-manifest.json
-public/hot
-
-# IDE and editor files
+# IDE files
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
 
-# OS generated files
+# OS files
 .DS_Store
 Thumbs.db
 
 # Logs
 *.log
 
-# Testing
-.phpunit.result.cache
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Composer
+composer.lock
+
+# Vite
+vite.config.js
 ```
