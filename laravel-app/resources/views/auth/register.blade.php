@@ -54,6 +54,18 @@
                 </div>
                 
                 <div class="form-group">
+                    <label>Тип регистрации</label>
+                    <div style="margin: 10px 0;">
+                        <label style="display: inline-block; margin-right: 20px;">
+                            <input type="radio" name="role" value="visitor" checked> Посетитель
+                        </label>
+                        <label style="display: inline-block;">
+                            <input type="radio" name="role" value="instructor"> Ведущий мастер-класса
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
                     <button type="submit" class="btn" style="background: #4CAF50; color: white; padding: 10px 30px; border: none; cursor: pointer; border-radius: 4px;">
                         Отправить
                     </button>

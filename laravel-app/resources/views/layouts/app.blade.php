@@ -12,7 +12,9 @@
     <div class="header">
         <div class="row grid middle between">
             <div class="logo">
-                <img src="{{ asset('img/logo.png') }}" alt="Логотип">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('img/logo.png') }}" alt="Логотип">
+                </a>
             </div>
             <div class="title">
                 Клуб любителей творчества «ОчУмелые ручки»
@@ -20,7 +22,7 @@
             <div class="auth">
                 @auth
                     @if(auth()->user()->isInstructor())
-                        <a href="{{ route('cabinet.index') }}">Личный кабинет</a>
+                        <a href="{{ route('cabinet.index') }}" style="margin-right: 15px;">Личный кабинет</a>
                     @endif
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf

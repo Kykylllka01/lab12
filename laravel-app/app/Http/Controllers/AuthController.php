@@ -59,7 +59,8 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'phone' => ['required', 'string', 'regex:/^(\+7|8)[0-9]{10}$/'],
+            'phone' => ['required', 'string', 'regex:/^\+?[78]\d{10}$/'],
+            'role' => 'sometimes|in:visitor,instructor',
         ], [
             'name.required' => 'Поле ФИО обязательно для заполнения.',
             'email.required' => 'Поле Email обязательно для заполнения.',
@@ -77,10 +78,15 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => $validated['password'],
             'phone' => $validated['phone'],
-            'role' => 'visitor', // По умолчанию посетитель
+            'role' => $validated['role'] ?? 'visitor',
         ]);
 
         Auth::login($user);
+
+        // Перенаправление в зависимости от роли
+        if ($user->isInstructor()) {
+            return redirect('/cabinet');
+        }
 
         return redirect('/');
     }
