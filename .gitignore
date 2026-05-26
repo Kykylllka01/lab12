@@ -1,1 +1,38 @@
-Nothing should be ignored in this case, as the only modified file is a source code file (AuthController.php) and there are no build artifacts, dependencies, or temporary files in the changes.
+```
+# Laravel-specific ignores
+vendor/
+composer.lock
+.env
+.env.local
+.env.*
+!env.example
+
+# Cache and logs
+bootstrap/cache/*
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Build and distribution
+public/build/
+public/mix-manifest.json
+public/hot
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing
+.phpunit.result.cache
+```
