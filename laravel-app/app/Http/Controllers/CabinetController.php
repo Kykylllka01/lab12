@@ -31,6 +31,45 @@ class CabinetController extends Controller
     }
 
     /**
+     * Личный кабинет обычного пользователя (записи на мастер-классы)
+     */
+    public function userIndex()
+    {
+        // Только для обычных пользователей (не инструкторов)
+        if (!Auth::check() || Auth::user()->isInstructor()) {
+            abort(403, 'Доступ только для участников мастер-классов.');
+        }
+
+        $user = Auth::user();
+        $enrollments = Enrollment::with(['masterClass.category', 'masterClass.instructor'])
+            ->where('user_id', $user->id)
+            ->orderByRaw('(SELECT date FROM master_classes WHERE id = enrollments.master_class_id) DESC')
+            ->orderByRaw('(SELECT time FROM master_classes WHERE id = enrollments.master_class_id) DESC')
+            ->get();
+
+        return view('cabinet.user-index', compact('user', 'enrollments'));
+    }
+
+    /**
+     * Отмена записи пользователя на мастер-класс
+     */
+    public function cancelEnrollment($masterClassId)
+    {
+        if (!Auth::check() || Auth::user()->isInstructor()) {
+            abort(403, 'Доступ только для участников мастер-классов.');
+        }
+
+        $enrollment = Enrollment::where('user_id', Auth::id())
+            ->where('master_class_id', $masterClassId)
+            ->firstOrFail();
+
+        $enrollment->delete();
+
+        return redirect()->route('cabinet.user.index')
+            ->with('success', 'Запись на мастер-класс отменена.');
+    }
+
+    /**
      * Показать форму добавления мастер-класса
      */
     public function create()

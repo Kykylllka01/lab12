@@ -34,6 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/enroll/{masterClass}', [CategoryController::class, 'enroll'])->name('enroll.show');
     Route::post('/enroll/{masterClass}/confirm', [CategoryController::class, 'confirmEnroll'])->name('enroll.confirm');
     Route::delete('/enroll/{masterClass}/cancel', [CategoryController::class, 'cancelEnroll'])->name('enroll.cancel');
+    
+    // Личный кабинет пользователя (не инструктора)
+    Route::prefix('user-cabinet')->name('cabinet.user.')->group(function () {
+        Route::get('/', [CabinetController::class, 'userIndex'])->name('index');
+        Route::post('/cancel/{masterClass}', [CabinetController::class, 'cancelEnrollment'])->name('cancel');
+    });
 });
 
 // Личный кабинет ведущего (только для инструкторов)
