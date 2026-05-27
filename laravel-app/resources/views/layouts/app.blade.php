@@ -23,6 +23,8 @@
                 @auth
                     @if(auth()->user()->isInstructor())
                         <a href="{{ route('cabinet.index') }}" style="margin-right: 15px;">Личный кабинет</a>
+                    @else
+                        <a href="{{ route('cabinet.user.index') }}" style="margin-right: 15px;">Личный кабинет</a>
                     @endif
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
